@@ -1,0 +1,25 @@
+[tasks]
+bmc
+cover
+prove
+
+[options]
+bmc: mode bmc
+cover: mode cover
+prove: mode prove
+cover: depth 70
+prove: depth 10
+
+[engines]
+smtbmc
+
+[script]
+ghdl  -gWAITPRETRIGG_CNT=2 --std=08 rising_pulse_detector.vhd rising_pulse_detector.psl -e rising_pulse_detector
+prep -top rising_pulse_detector
+
+[files]
+../hdl/rising_pulse_detector.vhd
+rising_pulse_detector.psl
+
+# to run it :
+# sby --yosys "yosys -m /opt/ghdl-yosys-plugin/ghdl.so" -f rising_pulse_detector.sby
